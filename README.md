@@ -1,53 +1,90 @@
-# SQL Backend with Node.js
+# User Management App
 
-This project demonstrates how to set up a SQL backend using Node.js.
+A simple user management web application using Node.js, Express, MySQL, and EJS for templating.
 
-## Prerequisites
+## Features
+- Add users manually or generate fake users using Faker.js
+- View the total number of users
+- List all users
+- Edit user details
+- Delete users
 
-- Node.js installed
-- SQL database (e.g., MySQL, PostgreSQL)
+## Technologies Used
+- Node.js
+- Express.js
+- MySQL (using `mysql2` package)
+- Faker.js (for generating fake users)
+- UUID (for generating unique user IDs)
+- EJS (for templating)
+- Method-Override (to support HTTP PATCH & DELETE in forms)
 
-## Installation
+## Installation & Setup
+### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/)
+- [MySQL](https://www.mysql.com/)
 
+### Steps to Run the Project
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-repo/sql-backend-nodejs.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd sql-backend-nodejs
-    ```
-3. Install dependencies:
-    ```bash
-    npm install
-    ```
+   ```sh
+   git clone <repository-url>
+   cd <project-directory>
+   ```
 
-## Configuration
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-1. Create a `.env` file in the root directory and add your database configuration:
-    ```env
-    DB_HOST=your-database-host
-    DB_USER=your-database-user
-    DB_PASSWORD=your-database-password
-    DB_NAME=your-database-name
-    ```
+3. Set up the MySQL database:
+   - Create a database named `sds_app`
+   - Create a `user` table with the following structure:
+     ```sql
+     CREATE TABLE user (
+       id VARCHAR(255) PRIMARY KEY,
+       username VARCHAR(100) NOT NULL,
+       email VARCHAR(255) UNIQUE NOT NULL,
+       password VARCHAR(255) NOT NULL
+     );
+     ```
 
-## Running the Application
+4. Update database credentials in `index.js`:
+   ```js
+   const connection = mysql.createConnection({
+       host: 'localhost',
+       user: 'root',
+       database: 'sds_app',
+       password: 'your_password_here'
+   });
+   ```
 
-1. Start the server:
-    ```bash
-    npm start
-    ```
+5. Start the server:
+   ```sh
+   node index.js
+   ```
 
-2. The server will be running at `http://localhost:3000`.
+6. Open your browser and visit:
+   ```
+   http://localhost:8000
+   ```
 
-## API Endpoints
+## API Routes
+### Home Page
+- `GET /` - Shows the total number of users
 
-- `GET /api/items` - Retrieve all items
-- `POST /api/items` - Create a new item
-- `PUT /api/items/:id` - Update an item by ID
-- `DELETE /api/items/:id` - Delete an item by ID
+### User Operations
+- `GET /user` - Displays all users
+- `GET /add` - Form to add a new user
+- `POST /` - Adds a new user
+- `GET /user/:id/edit` - Form to edit a user
+- `PATCH /user/:id` - Updates a user’s username
+- `GET /user/:id/delete` - Confirmation page for deleting a user
+- `DELETE /user/:id` - Deletes a user
+
+## Notes
+- Faker.js is used to generate random user data.
+- Passwords are stored in plaintext (Not secure, should be hashed in production).
+- Ensure MySQL is running before starting the server.
 
 ## License
-
 This project is licensed under the MIT License.
