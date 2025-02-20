@@ -124,6 +124,9 @@ app.post("/",(req,res)=>{
  // res.send("working!");
 });
 
+app.get("/users",(req,res)=>{
+  res.redirect("/user");
+})
 
 
 
@@ -156,6 +159,13 @@ app.get("/user",(req,res)=>{
 
 });
 
+
+app.get("/user/home",(req,res)=>{
+
+  res.redirect("/");
+
+
+});
 
 
 //edit route-----------
