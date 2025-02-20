@@ -57,6 +57,11 @@
         color: white;
     }
 
+    .home-btn {
+        background-color: #17a2b8;
+        color: white;
+    }
+
     button:hover {
         opacity: 0.9;
         transform: scale(1.05);
@@ -87,13 +92,13 @@
             <td><%= users[i].id %></td>
             <td><%= users[i].username %></td>
             <td><%= users[i].email%></td>
-            <td><form method="GET" action ="/user/<%= users[i].id %>/edit"><button>Edit username</button></form></td>
-            <td><form method="GET" action ="/user/<%= users[i].id %>/delete"><button>DELETE</button></form></td>
+            <td><form method="GET" action ="/user/<%= users[i].id %>/edit"><button class="edit-btn">Edit username</button></form></td>
+            <td><form method="GET" action ="/user/<%= users[i].id %>/delete"><button class="delete-btn">DELETE</button></form></td>
         </tr>
         <% } %>
     </table>
     <form method="GET" action="/user/home">
-        <button>Home</button>
+        <button class="home-btn">Home</button>
     </form>
 </body>
 </html>
