@@ -148,7 +148,7 @@ app.get("/user",(req,res)=>{
        // console.log(result);
        //let {id,username,email}=user;
       
-      res.render("users.ejs",{users} );
+        res.render("users.ejs",{ users });
     
     });
   }catch(err){
